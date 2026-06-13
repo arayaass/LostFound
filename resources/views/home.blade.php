@@ -1,0 +1,7 @@
+@extends('layouts.app') @section('heading','Beranda') @section('subheading','Temukan dan laporkan barang di sekitar Anda.') @section('content')
+<div class="hero"><h1>Bersama, kita bantu barang kembali ke pemiliknya.</h1><p>Cari laporan terbaru atau bagikan informasi barang yang hilang dan ditemukan.</p><form class="searchbar" action="{{route('items.search')}}"><input name="q" placeholder="Cari nama barang..."><button class="btn btn-primary">Cari</button></form></div>
+<div class="category-chips home-categories"><a href="{{route('items.search')}}" class="active">Semua Kategori</a>@foreach($categories as $value=>$label)<a href="{{route('items.search',['category'=>$value])}}">{{$label}}</a>@endforeach</div>
+<div class="stats"><div class="stat"><span class="muted">Barang hilang aktif</span><strong>{{$stats['lost']}}</strong></div><div class="stat"><span class="muted">Barang ditemukan aktif</span><strong>{{$stats['found']}}</strong></div><a class="stat stat-link" href="{{route('items.resolved')}}"><span class="muted">Berhasil kembali</span><strong>{{$stats['resolved']}}</strong><small>Lihat barang selesai</small></a></div>
+<div class="section-head"><div><h2>Laporan terbaru</h2><span class="muted">Informasi terbaru dari komunitas.</span></div><a class="btn btn-soft" href="{{route('items.search')}}">Lihat semua</a></div>
+<div class="grid">@forelse($items as $item)<x-item-card :item="$item"/>@empty<div class="panel empty" style="grid-column:1/-1">Belum ada laporan. Jadilah yang pertama membuat laporan.</div>@endforelse</div>
+@endsection
